@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head><title>RSBK Team Project</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+</h:head>
+<body>
+	<div class="bg" id="home">
+		<div class="topnav" id="myTopnav">
+  			<a href="#" class="active">Home</a>
+  			<a href="uts.jsf">UTS Task</a>
+  			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    			<i class="fa fa-bars"></i>
+  			</a>
+		</div>
+		
+		<div style="padding-left:16px">
+			<div class="vertical-center">
+  				<h1>RSBK Team Project Home Page</h1>
+  				<p>Pemenuhan tugas kelompok RSBK</p>
+			</div>
+		</div>
+	</div>
+	<div id="about">
+		<div class="content">
+			<center>
+				<h2>Meet the Team</h2>
+			</center>
+			<div class="row">
+				<div class="column">
+					<center>
+						<div class="card" style="padding: 0;">
+							<img
+								src="https://rsbk-rozyzzx.s3.us-east-2.amazonaws.com/budum.png"
+								alt="Rozy" style="width: 100%" />
+							<div class="container">
+								<h2>Muhammad Fachrurrozy</h2>
+								<p class="title">21120117130073</p>
+							</div>
+						</div>
+					</center>
+				</div>
+
+				<div class="column">
+					<center>
+						<div class="card" style="padding: 0;">
+							<img
+								src="https://rsbk-rozyzzx.s3.us-east-2.amazonaws.com/divi.png"
+								alt="Divi" style="width: 100%" />
+							<div class="container">
+								<h2>Divianis Oktaviyani</h2>
+								<p class="title">21120117120017</p>
+								<p />
+							</div>
+						</div>
+					</center>
+				</div>
+
+				<div class="column">
+					<center>
+						<div class="card" style="padding: 0;">
+							<img
+								src="https://rsbk-rozyzzx.s3.us-east-2.amazonaws.com/dwi.png"
+								alt="Dwi" style="width: 100%" />
+							<div class="container">
+								<h2>Dwi Supardiyono</h2>
+								<p class="title">21120117120024</p>
+								<p />
+							</div>
+						</div>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		function myFunction() {
+  			var x = document.getElementById("myTopnav");
+  			if (x.className === "topnav") {
+    			x.className += " responsive";
+  			} else {
+    			x.className = "topnav";
+  			}
+		}
+	</script>	
+</body>
+</html>

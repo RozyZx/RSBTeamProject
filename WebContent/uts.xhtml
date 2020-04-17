@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:mcv="http://myfaces.apache.org/commons/validators">
+<h:head><title>Task UTS</title>
+<link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
+</h:head>
+<body>
+	<div class="bg">
+		<div class="topnav" id="myTopnav">
+  			<a href="index.jsf">Home</a>
+  			<a href="#" class="active">UTS Task</a>
+  			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    			<i class="fa fa-bars"></i>
+  			</a>
+		</div>
+		<div class="content">
+			<div class="card" id="surveycard">
+				<div class="container">
+					<center>
+						<h2 class="no-margin">Survey Mahasiswa</h2>
+						<hr />
+						<p />
+					</center>
+					<h:form id="myForm">
+						<h:panelGrid columns="1" style="width: 100%;">
+							<h:outputLabel styleClass="margin-top">Nama</h:outputLabel>
+							<h:panelGrid columns="2" style="width: 100%;">
+								<h:inputText id="fname" value="#{respon.fname}"
+									required="true" requiredMessage="Required"
+									styleClass="input" a:placeholder="First Name"/>
+								<h:inputText id="lname" value="#{respon.lname}"
+									required="true" requiredMessage="Required"
+									styleClass="input" a:placeholder="Last Name"/>
+								<h:message for="fname" styleClass="warning"/>
+								<h:message for="lname" styleClass="warning"/>
+							</h:panelGrid>
+							<p />
+							<h:outputLabel styleClass="margin-top">Alamat</h:outputLabel>
+							<h:inputText id="addrst" value="#{respon.addrst}"
+								required="true" requiredMessage="Required"
+								styleClass="input" a:placeholder="Alamat"/>
+							<h:message for="addrst" styleClass="warning"/>
+							<h:panelGrid columns="2" style="width: 100%;">
+								<h:inputText id="addrcity" value="#{respon.addrcity}"
+									required="true" requiredMessage="Required"
+									styleClass="input" a:placeholder="Kota"/>
+								<h:inputText id="addrctr" value="#{respon.addrctr}"
+									required="true" requiredMessage="Required"
+									styleClass="input" a:placeholder="Negara"/>
+								<h:message for="addrcity" styleClass="warning"/>
+								<h:message for="addrctr" styleClass="warning"/>
+								<h:inputText id="addrpos" value="#{respon.addrpos}"
+									required="true" requiredMessage="Required"
+									validatorMessage="Must be 5 digit number"
+									styleClass="input" a:placeholder="Kode Pos">
+									<f:validateLength minimum="5" />
+									<f:validateLongRange minimum="0" maximum="99999"/>
+								</h:inputText>
+								<h:message for="addrpos" styleClass="warning"/>
+							</h:panelGrid>
+							<p />
+							<h:outputLabel styleClass="margin-top">Kontak</h:outputLabel>
+							<h:panelGrid columns="2" style="width: 100%;">
+								<h:inputText id="phone" value="#{respon.phone}"
+									required="true" requiredMessage="Required"
+									validatorMessage="At least 10 digit Number"
+									styleClass="input" a:placeholder="No Telp">
+									<f:validateLength minimum="10" />
+									<f:validateLongRange minimum="0" maximum="999999999999"/>
+								</h:inputText>
+								<h:inputText id="email" value="#{respon.email}"
+									required="true" requiredMessage="Required"
+									validatorMessage="Invalid"
+									styleClass="input" a:placeholder="Email">
+									<mcv:validateEmail />
+								</h:inputText>
+								<h:message for="phone" styleClass="warning"/>
+								<h:message for="email" styleClass="warning"/>
+							</h:panelGrid>
+							<p />
+							<h:outputLabel styleClass="margin-top">Tanggal Survei</h:outputLabel>
+							<h:inputText id="date" value="#{respon.date}" required="true"
+								requiredMessage="Required" styleClass="input"
+								validatorMessage="ex: 01-01-2000"
+								a:placeholder="DD-MM-YYYY" style="width: 50%;" />
+							<h:message for="date" styleClass="warning" />
+						</h:panelGrid>
+						<hr />
+						<p />
+						<h:panelGrid columns="1" style="width: 100%;">
+							<h:outputLabel styleClass="margin-top">Aspek yang disenangi dari UNDIP</h:outputLabel>
+							<h:selectManyCheckbox value="#{respon.fav}" styleClass="grid">
+								<f:selectItems value="#{respon.favValue}" var="n"
+									itemLabel="#{n.responLabel}" itemValue="#{n.responValue}"/>
+							</h:selectManyCheckbox>
+							<p/>
+							<h:outputLabel styleClass="margin-top">Bagaimana anda mengetahui UNDIP?</h:outputLabel>
+							<h:selectOneRadio value="#{respon.how}" styleClass="grid">
+								<f:selectItems value="#{respon.howValue}" var="n"
+									itemLabel="#{n.responLabel}" itemValue="#{n.responValue}"/>	
+							</h:selectOneRadio>
+							<p />
+							<h:outputLabel styleClass="margin-top">Seberapa besar kemungkinan anda merekomendasikan UNDIP?</h:outputLabel>
+							<h:selectOneMenu converter="#{converter}" value="#{respon.rec}" styleClass="grid" style="padding: 12px 20px;">
+								<f:selectItems value="#{respon.recValue}" var="n"
+									itemLabel="#{n.responLabel}" itemValue="#{n.responValue}"/>
+							</h:selectOneMenu>
+							<p />
+							<h:outputLabel styleClass="margin-top">Komentar</h:outputLabel>
+							<h:inputTextarea id="comment" value="#{respon.comment}"
+								styleClass="input" style="min-height: 80px; resize: none;"/>
+						</h:panelGrid>
+						<h:panelGrid columns="2" style="width: 100%;" cellpadding="0">
+							<button onclick="cancel" class="input" style="font-weight: bold;">Cancel</button>
+							<h:commandButton value="Submit" action="#{respon.doSubmit}" 
+								styleClass="input" style="background-color: #03dbfc;color: white; font-weight: bold;"
+								onclick="done" />
+						</h:panelGrid>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		function cancel() {
+			var r = confirm("Delete entries?");
+			if(r==true){
+				document.getElementById("myForm").reset();
+			}
+		}
+
+		function done() {
+			alert("Success"");
+		}
+	
+		function myFunction() {
+  			var x = document.getElementById("myTopnav");
+  			if (x.className === "topnav") {
+    			x.className += " responsive";
+  			} else {
+    			x.className = "topnav";
+  			}
+		}
+	</script>	
+</body>
+</html>
