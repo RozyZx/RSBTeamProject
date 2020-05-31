@@ -16,14 +16,7 @@ Local Server
 note: webserver yang telah dicoba: Payara dan Tomcat 8.5
 
 ### URL S3 / HomePage
-
+https://rsbk-rozyzzx.s3.us-east-2.amazonaws.com/
 
 ### URL EC2 instance
-
-
-# Screenshots
-
-![Home Page](doc/home.png "Home Page")
-![UAS Page](doc/uas.png "UAS Page")
-![Success Page](doc/success.png "Success Page")
-![Fail Page](doc/fail.png "Fail Page")
+http://3.134.153.68/

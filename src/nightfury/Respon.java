@@ -2,6 +2,12 @@ package nightfury;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
@@ -19,6 +25,69 @@ import com.opencsv.exceptions.CsvValidationException;
 @ApplicationScoped
 @RequestScoped
 public class Respon {
+	
+	// db action
+	/* CREATE TABLE survey_data(
+	    name VARCHAR(64) NOT NULL,
+	    addr VARCHAR(256) NOT NULL,
+	    phone VARCHAR(12) NOT NULL,
+	    email VARCHAR(128) NOT NULL,
+	    date VARCHAR(16) NOT NULL,
+	    how VARCHAR(64) NOT NULL,
+	    rec VARCHAR(64) NOT NULL,
+	    fav VARCHAR(64) NOT NULL,
+	    comment VARCHAR(128) NOT NULL);
+	 */
+	
+	private boolean addDB() {
+		String password = "rsbk_survey";
+	    String user = "rsbk_survey";
+	    String database_name = "rsbk_survey";
+	    String url_base = "db4free.net:3306/";
+	    Connection c;
+	    Statement script;
+	    PreparedStatement pst;
+		// prepare data
+		String name = fname + " " + lname;
+		String addr = addrst + ", " + addrcity + "," + addrctr + "," + addrpos;
+		String _fav = "";
+		for(String val : fav) {
+			_fav += val + ",";
+		}
+		
+		try {
+			
+			c = DriverManager.getConnection(
+                    "jdbc:mysql://"+
+                            url_base+
+                            database_name+
+                            "?zeroDateTimeBehavior=CONVERT_TO_NULL",
+                    user,
+                    password);
+            script = c.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
+            
+			String sql = "insert into survey_data values(?,?,?,?,?,?,?,?,?)";
+			pst = c.prepareStatement(sql);
+			pst.setString(1, name);
+			pst.setString(2, addr);
+			pst.setString(3, phone);
+			pst.setString(4, email);
+			pst.setString(5, date);
+			pst.setString(6, how);
+			pst.setString(7, rec);
+			pst.setString(8, _fav);
+			pst.setString(9, comment);
+			pst.execute();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	// end of db action
 	
 	//Respondent credential
 	private String fname, lname, addrst, addrcity,
@@ -171,44 +240,8 @@ public class Respon {
 	}
 	// end
 	
-	public void storeData() {
-		System.out.println("storeData called");
-		csvInit();
-		try {
-			CSVWriter wr = new CSVWriter(new FileWriter("data.csv", true));
-			StringBuffer sb = new StringBuffer();
-			for(String var : fav) {
-				sb.append(var + "|");
-			}
-			String[] entries = {
-					fname, lname, addrst, addrcity,
-					addrctr, addrpos, phone, email, date,
-					sb.toString(), how, rec
-			};
-			wr.writeNext(entries);
-		} catch (IOException e) {
-			e.printStackTrace();
-			csvInit();
-		}
-	}
-	
 	public String doSubmit() {
-		return "confirm-registration";
-	}
-	
-	private void csvInit() {
-		System.out.println("csvInit called");
-		String[] header = { 
-				"fname","lname","addrst",
-				"addrcity","addrctr","addrpos",
-				"phone","email","date",
-				"fav","how","rec"};
-		File file = new File("data.csv");
-		try {
-			FileWriter writer = new FileWriter(file);
-			CSVWriter wr = new CSVWriter(writer);
-			wr.writeNext(header);
-			writer.close();
-		} catch(Exception e) {e.printStackTrace();}
+		if(addDB()) return "confirm-registration";
+		else return "failed";
 	}
 }

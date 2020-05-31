@@ -6,14 +6,14 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:mcv="http://myfaces.apache.org/commons/validators">
-<h:head><title>Task UTS</title>
+<h:head><title>Task UAS</title>
 <link href="./css/styles.css" rel="stylesheet" type="text/css"/> 
 </h:head>
 <body>
 	<div class="bg">
 		<div class="topnav" id="myTopnav">
   			<a href="index.jsf">Home</a>
-  			<a href="#" class="active">UTS Task</a>
+  			<a href="#" class="active">UAS Task</a>
   			<a href="javascript:void(0);" class="icon" onclick="myFunction()">
     			<i class="fa fa-bars"></i>
   			</a>
@@ -116,7 +116,7 @@
 								styleClass="input" style="min-height: 80px; resize: none;"/>
 						</h:panelGrid>
 						<h:panelGrid columns="2" style="width: 100%;" cellpadding="0">
-							<button onclick="cancel" class="input" style="font-weight: bold;">Cancel</button>
+							<button onclick="cancel()" class="input" style="font-weight: bold;">Cancel</button>
 							<h:commandButton value="Submit" action="#{respon.doSubmit}" 
 								styleClass="input" style="background-color: #03dbfc;color: white; font-weight: bold;"
 								onclick="done" />
