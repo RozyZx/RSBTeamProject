@@ -15,6 +15,9 @@ Local Server
 
 note: webserver yang telah dicoba: Payara dan Tomcat 8.5
 
+Database yang digunakan: mysql pada 
+https://db4free.net/
+
 ### URL S3 / HomePage
 https://rsbk-rozyzzx.s3.us-east-2.amazonaws.com/
 
