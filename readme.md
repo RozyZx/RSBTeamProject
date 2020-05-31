@@ -22,7 +22,7 @@ https://db4free.net/
 https://rsbk-rozyzzx.s3.us-east-2.amazonaws.com/
 
 ### URL EC2 instance
-
+http://rsbkuas-env.eba-zs6hspem.us-east-2.elasticbeanstalk.com/
 
 # Screenshots
 
