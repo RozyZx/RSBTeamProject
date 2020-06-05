@@ -1,6 +1,8 @@
-# Tugas JSF RSBK
+# Tugas JPA RSBK
 
-Tugas UTS, oleh kelompok:
+(overwrite dari tugas UTS)
+
+Tugas UAS oleh kelompok:
 - Muhammad Fachrurrozy | 21120117130073
 - Divianis Oktaviyani | 21120117120017
 - Dwi Supardiyono | 21120117120024
